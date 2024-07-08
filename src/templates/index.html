@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Logger</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Logger</h1>
+
+    <form method="get" action="/">
+        <input type="text" name="search" placeholder="Search..." value="{{ search }}">
+        <input type="submit" value="Search">
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th><a href="/?sort_by=log_file&order={{ 'asc' if sort_by != 'log_file' or order == 'desc' else 'desc' }}&search={{ search }}">Log File</a></th>
+                <th><a href="/?sort_by=info_type&order={{ 'asc' if sort_by != 'info_type' or order == 'desc' else 'desc' }}&search={{ search }}">Info Type</a></th>
+                <th><a href="/?sort_by=message&order={{ 'asc' if sort_by != 'message' or order == 'desc' else 'desc' }}&search={{ search }}">Message</a></th>
+                <th><a href="/?sort_by=date_and_time&order={{ 'asc' if sort_by != 'date_and_time' or order == 'desc' else 'desc' }}&search={{ search }}">Date and Time</a></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for log in logs %}
+            <tr>
+                <td>{{ log.log_file }}</td>
+                <td>{{ log.info_type }}</td>
+                <td>{{ log.message }}</td>
+                <td>{{ log.date_and_time }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
